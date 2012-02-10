@@ -62,8 +62,9 @@
     <a href="#NAME">NAME</a>
     <a href="#SYNOPSIS">SYNOPSIS</a>
     <a href="#DESCRIPTION">DESCRIPTION</a>
-    <a href="#OPTIONS">OPTIONS</a>
+    <a href="#GLOBAL-OPTIONS">GLOBAL OPTIONS</a>
     <a href="#COMMANDS">COMMANDS</a>
+    <a href="#COMMAND-OPTIONS">COMMAND OPTIONS</a>
     <a href="#EXAMPLES">EXAMPLES</a>
     <a href="#SECURITY-CONSIDERATIONS">SECURITY CONSIDERATIONS</a>
     <a href="#LICENSE">LICENSE</a>
@@ -82,10 +83,10 @@
 
 <h2 id="SYNOPSIS">SYNOPSIS</h2>
 
-<p><code>cloudapp</code> [<code>--email</code>=<var>email</var>] [<code>--password</code>=<var>password</var>] <var>command</var> [<var>args</var>]<br />
+<p><code>cloudapp</code> [<code>--format</code>=<var>format</var>] <var>command</var> [<var>args</var>]<br />
 <code>cloudapp list</code> [<code>--count</code>=<var>count</var>]<br />
-<code>cloudapp bookmark</code> <var>url</var><br />
-<code>cloudapp upload</code> <var>file</var></p>
+<code>cloudapp bookmark</code> [<code>--private</code>] [<code>--public</code>] <var>url</var> [<var>url</var>...]<br />
+<code>cloudapp upload</code> [<code>--private</code>] [<code>--public</code>] <var>file</var> [<var>file</var>...]</p>
 
 <h2 id="DESCRIPTION">DESCRIPTION</h2>
 
@@ -93,14 +94,11 @@
 and Web apps. Sometimes it's more convenient to share without leaving the
 terminal and other times it's the only tool available.</p>
 
-<h2 id="OPTIONS">OPTIONS</h2>
+<h2 id="GLOBAL-OPTIONS">GLOBAL OPTIONS</h2>
 
 <dl>
-<dt><code>--email</code>=<var>email</var></dt><dd><p>Use <var>email</var> for CloudApp account credentials.</p></dd>
-<dt><code>--password</code>=<var>password</var></dt><dd><p>Use <var>password</var> for CloudApp account credentials.</p></dd>
-<dt><code>-f</code> <var>format</var>, <code>--format</code>=<var>format</var></dt><dd><p>Output using either <strong>pretty</strong> or <strong>csv</strong> format. (Default: <strong>pretty</strong>  when
-output to a terminal and <strong>csv</strong> when output is piped to another program.)</p></dd>
-<dt><code>-n</code> <var>count</var>, <code>--count</code>=<var>count</var></dt><dd><p>Display <var>count</var> drops. (Default: <strong>20</strong>)</p></dd>
+<dt><code>-f</code> <var>format</var>, <code>--format</code>=<var>format</var></dt><dd>Output using either <strong>pretty</strong> or <strong>csv</strong> format. (Default: <strong>pretty</strong>  when
+output to a terminal and <strong>csv</strong> when output is piped to another program.)</dd>
 </dl>
 
 
@@ -108,8 +106,17 @@ output to a terminal and <strong>csv</strong> when output is piped to another pr
 
 <dl>
 <dt><code>list</code> [<code>--count</code>=<var>count</var>]</dt><dd><p>List the most recent <var>count</var> drops. The default is to list <strong>20</strong> drops.</p></dd>
-<dt><code>bookmark</code> <var>url</var> [<var>url</var>...]</dt><dd><p>Create a new bookmark to each <var>url</var> and print each link.</p></dd>
-<dt><code>upload</code> <var>file</var> [<var>file</var>...]</dt><dd><p>Upload each <var>file</var> and print each link.</p></dd>
+<dt><code>bookmark</code> [<code>--private</code>] [<code>--public</code>] [<var>url</var>...]</dt><dd><p>Create a new bookmark to each <var>url</var> and print each link.</p></dd>
+<dt><code>upload</code> [<code>--private</code>] [<code>--public</code>] <var>file</var> [<var>file</var>...]</dt><dd><p>Upload each <var>file</var> and print each link.</p></dd>
+</dl>
+
+
+<h2 id="COMMAND-OPTIONS">COMMAND OPTIONS</h2>
+
+<dl>
+<dt><code>--private</code></dt><dd><p>Use a private (long) link when creating a new drop.</p></dd>
+<dt><code>--public</code></dt><dd><p>Use a public (short) link when creating a new drop.</p></dd>
+<dt><code>-n</code> <var>count</var>, <code>--count</code>=<var>count</var></dt><dd><p>Display <var>count</var> drops. (Default: <strong>20</strong>)</p></dd>
 </dl>
 
 
@@ -176,9 +183,9 @@ http://cl.ly/1y0j403g3D0c0X1G0R3m
 
 <h2 id="SECURITY-CONSIDERATIONS">SECURITY CONSIDERATIONS</h2>
 
-<p>As of right now, <code>cloudapp</code> makes use of
-<a href="https://github.com/davetron5000/gli/wiki/Config"><code>gli</code>'s built-in configuration handling</a> to store your CloudApp
-credentials <strong>in plain text</strong> at <code>~/.cloudapp.rc</code>.</p>
+<p>Your credentials are stored <strong>in plain text</strong> at <code>~/.cloudapprc</code>. If this
+worries you, keep an eye on <a href="https://github.com/cloudapp/cloudapp/issues/10">issue #10</a>. Some sort of non-plaintext
+authentication is planned before 1.0 is released.</p>
 
 <h2 id="LICENSE">LICENSE</h2>
 
